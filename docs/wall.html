@@ -175,15 +175,45 @@ The final markup should be similar to:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>store these in the global object so they can be accessed by other objects too</p>
+              <p>Store these in the global object so they can be accessed by other objects too</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>			wall.container = <span class="keyword">this</span>._input.parents(<span class="string">'div.wall'</span>);
-			wall.inputListItem = <span class="keyword">this</span>._input.parent().before(<span class="string">'&lt;li class="wall-brick-search"&gt;&lt;/li&gt;'</span>);
-		},
+            <div class="content"><div class='highlight'><pre>			wall.container = <span class="keyword">this</span>._input.parents(<span class="string">'div.wall'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Add a search icon on the left, for visual cue</p>
 
-		_initAutocomplete: <span class="keyword">function</span>() {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			wall.inputListItem = <span class="keyword">this</span>._input.parent().before(<span class="string">'&lt;li class="wall-brick-search"&gt;&lt;/li&gt;'</span>);
+		},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Typical <code>jQuery UI autocomplete</code> options,
+apart from <code>source</code> which is delegated to the search collection;
+<code>select</code> is triggered when an item in the list selected;
+the <code>position</code> is shifted down as the container is padded</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		_initAutocomplete: <span class="keyword">function</span>() {
 			<span class="keyword">var</span> self = <span class="keyword">this</span>;
 			<span class="keyword">var</span> options = {
 				position	: { at: <span class="string">"left bottom+7"</span> },
@@ -223,11 +253,11 @@ The final markup should be similar to:</p>
         </li>
         
         
-        <li id="section-8">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>This selects the text box anytime that the user clicks on the entire box</p>
 
@@ -279,11 +309,11 @@ The final markup should be similar to:</p>
         </li>
         
         
-        <li id="section-9">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>Populate the collection with the dummy data</p>
 
@@ -317,11 +347,11 @@ The final markup should be similar to:</p>
         </li>
         
         
-        <li id="section-10">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>start the app on document ready</p>
 
