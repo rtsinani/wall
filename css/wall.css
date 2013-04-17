@@ -1,0 +1,136 @@
+.wall {
+	width: 450px;
+	border: 1px solid #888;
+	margin: 0;
+	padding: 3px 5px;
+	border-radius: 24px;
+	cursor: text;
+}
+
+.wall .wall-ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: block;
+}
+
+.wall .wall-brick {
+	margin: 0 3px 0 0;
+	padding: 0 6px 0 10px;
+	font-size: 12px;
+	line-height: 18px;
+	display: inline-block;
+	float: left;
+	border: 1px solid #bbb;
+	background: #F4FAFC;
+	border-radius: 12px;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+}
+
+.wall .wall-brick-input {
+	padding: 0;
+	border-color: transparent;
+	background: transparent;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+}
+
+.wall .wall-input {
+	margin: 0;
+	padding: 0;
+	border: none;
+	font-size: 12px;
+	line-height: 14px;
+	background: transparent;
+}
+
+.wall .wall-input:focus {
+	outline: 0;
+}
+
+.wall .wall-brick-remove {
+	background: url(images/ui-icons_888888_256x240.png) -80px -128px no-repeat;
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	margin: 0 0 2px 3px;
+	vertical-align: middle;
+}
+
+.wall .wall-brick-remove:hover {
+	background-image: url(images/ui-icons_cd0a0a_256x240.png);
+}
+
+.wall .wall-brick-search {
+	background: url(images/ui-icons_888888_256x240.png) -160px -112px no-repeat;
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	margin: 2px 6px 0 0;
+	vertical-align: middle;
+	float: left;
+	transform: rotate(270deg);
+	-webkit-transform: rotate(270deg);
+	-ms-transform: rotate(270deg);
+}
+
+
+.wall .ui-autocomplete { 
+	max-width:inherit; 
+	max-height:200px; 
+	overflow-y:auto; 
+	overflow-x:hidden; 
+}
+
+* html .wall .ui-autocomplete { 
+	height: 100px; 
+}
+
+.wall .ui-autocomplete { 
+	margin: 0; 
+	padding: 0; 
+	border: 1px solid #C0C0C0; 
+	border-top: none;
+  background: #fff; 
+  cursor: pointer; 
+  z-index: 10000; 
+  width: auto; 
+  min-width: 80px; 
+  max-height: 240px; 
+  font-size: 13px; 
+  opacity: 0.97;
+	border-radius: 0 0 4px 4px; 
+	-moz-border-radius: 0 0 4px 4px; 
+	-webkit-border-radius: 0 0 4px 4px;
+  box-shadow: 0 0 2px #999; 
+  -webkit-box-shadow: 0 0 2px #999; 
+  -moz-box-shadow: 0 0 2px #999; 
+}
+
+.wall .ui-autocomplete .ui-menu-item { 
+	padding: 0;
+}
+
+.wall .ui-autocomplete .ui-menu-item a { 
+	color: #333; 
+	outline: none; 
+  padding: 1px 4px 3px; 
+  margin: 0; 
+  border: none; 
+ 	border-radius: 0; 
+ 	-moz-border-radius: 0; 
+ 	-webkit-border-radius: 0; 
+ }
+
+.wall .ui-autocomplete .ui-menu-item a:active { 
+	outline: none; 
+}
+
+.wall .ui-autocomplete .ui-menu-item .ui-state-focus { 
+	color: #fff; 
+	background: #3875D7; 
+	border: none; 
+}
+
