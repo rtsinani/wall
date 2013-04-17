@@ -9,9 +9,9 @@
 		// It takes care of instantiating the views, models, controllers, etc.
 		// 
 		//		wall.start()
-		start: function() {
+		start: function(inputId) {
 			var searchCollection = new wall.Languages;
-			var view = new wall.View({collection: searchCollection});
+			var view = new wall.View({inputId: inputId, collection: searchCollection});
 		},
 
 		// demo data
@@ -20,16 +20,14 @@
 
 	// View that holds the text box and different brick views
 	wall.View = Backbone.View.extend({
-		inputId: 'wall-input',
-
 		initialize: function() {
-			this._bricks = new Backbone.Collection
-			this._input  = $("#" + this.inputId);
+			this._bricks = new Backbone.Collection;
+			this._input  = $("#" + this.options.inputId);
 			this._initContainer();
 			this._initAutocomplete();
 			this._bind();
 			var brickView = new wall.BrickView({collection: this._bricks});
-			this._input.focus();
+			this._input.prop('placeholder', 'Enter a language').focus();
 		},
 
 		// The container of the wall is a UL element.
@@ -60,35 +58,46 @@
 					'</div>'
 				);
 
-			// store these in the global object so they can be accessed by other objects too
+			// Store these in the global object so they can be accessed by other objects
 			wall.container = this._input.parents('div.wall');
 			wall.inputListItem = this._input.parent().before('<li class="wall-brick-search"></li>');
 		},
 
+		// Typical `jQuery UI autocomplete` options,
+		// apart from `source` which is delegated to the search collection;
+		// `select` is triggered when an item in the list selected;
+		// the `position` is shifted down as the container is padded
 		_initAutocomplete: function() {
 			var self = this;
 			var options = {
-				position	: { at: "left bottom+7" },
-				appendTo  : wall.container,
-				source		: function(request, response) { self._getData(request, response); },
-				focus			: function() { return false; },
-				select		: function(e, ui) { self._select(e, ui); }
+				position: { at: "left bottom+7" },
+				appendTo: wall.container,
+				source:   function(request, response) { self._getData(request, response); },
+				focus:    function() { return false; },
+				select:   function(e, ui) { self._select(e, ui); }
 			};
 			this._input.autocomplete(options);
 		},
 
+		// Fetch the models from the collection, based on the term entered by the user.
+		// This would normallly communicate with a remote server, simply hard coded here.
+		// The fetched models are translated to `ui.item` format expected by `jQuery UI autocomplete`.
 		_getData: function(request, response) {
 			var languages = this.collection.fetch(request.term);
 			var models = languages.map(function(language) {
+				var name = language.get('name');
 				return {
 					id:    language.get('id'),
-					label: language.get('name'),
-					value: language.get('name')
+					label: name,
+					value: name
 				};
 			});
 			response(models);
 		},
 
+		// Create a model from the brick selected, and add it to the collection.
+		// The brick view, listening to this event, will be added automatically to the wall.
+		// We (almost) never call the brick view directly.
 		_select: function(e, ui) {
 			e.preventDefault();
 			this._bricks.add({
@@ -99,15 +108,63 @@
 			return false;
 		},
 
+		// When the user presses BACKSPACE for the first time, select the last brick,
+		// giving the user a cue that the brick is selected; 
+		// if the user presses BACKSPACE again, find the last brick, and remove it from collection
+		_onkeydown: function(e) {
+			if (e.keyCode == $.ui.keyCode.BACKSPACE && this._input.val().length == 0) {
+				this._onLastBrickSelected(function(lastBrick) {
+					this._input.autocomplete('close');
+					var id = lastBrick.data('id');
+					var model = this._bricks.get(id);
+					this._bricks.remove(model);
+				});
+			} else {
+				this._unselectLastBrick();
+			}
+		},
+
+		// Remove the selected class from the last brick
+		_unselectLastBrick: function() {
+			this._onLastBrick(function(lastBrick) {				
+				lastBrick.removeClass('wall-brick-selected');
+			});
+		},
+
+		// If the last brick is selected then call the callback function provided,
+		// otherwise select it
+		_onLastBrickSelected: function(fn) {
+			var self = this;
+			this._onLastBrick(function(lastBrick) {				
+				if (lastBrick.hasClass('wall-brick-selected')) {
+					if (fn) fn.call(self, lastBrick);
+				} else {
+					lastBrick.addClass('wall-brick-selected');
+				}
+			});
+		},
+
+		// Find the last brick, by checking the sibling before the brick holding the input box.
+		_onLastBrick: function(fn) {
+			var lastBrick = wall.inputListItem.prev('.wall-brick');
+			if (lastBrick && lastBrick.length && fn) fn(lastBrick);
+		},
+
+		// Selects the text box anytime the user clicks on the entire box.
 		_bind: function() {
 			var self = this;
-			// This selects the text box anytime that the user clicks on the entire box
-			wall.container.click(function() { self._input.focus(); });
+			wall.container
+				.click(function() { self._input.focus(); })
+				.keydown(function(e) { self._onkeydown(e); });
 		}
 	});
 
 	wall.BrickView = Backbone.View.extend({
-		_markup: '<li class="wall-brick" id="wall-brick-<%= id %>"><span class="wall-brick-name"><%= name %></span><a href="#remove" data-id="<%= id %>" class="wall-brick-remove"></a></li>',
+		_markup: 
+			'<li class="wall-brick" id="wall-brick-<%= id %>" data-id="<%= id %>">' +
+				'<span class="wall-brick-name"><%= name %></span>' + 
+				'<a href="#remove" data-id="<%= id %>" class="wall-brick-remove"></a>' + 
+		  '</li>',
 
 		initialize: function() {
 			var self = this;
@@ -175,7 +232,7 @@
 
 	// start the app on document ready
 	$(function() {
-		wall.start()
+		wall.start('wall-input');
 	});
 		
 

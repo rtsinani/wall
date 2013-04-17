@@ -19,6 +19,7 @@
 	padding: 0 6px 0 10px;
 	font-size: 12px;
 	line-height: 18px;
+	height: 18px;
 	display: inline-block;
 	float: left;
 	border: 1px solid #bbb;
@@ -26,6 +27,10 @@
 	border-radius: 12px;
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 12px;
+}
+
+.wall .wall-brick-selected {
+	background: #C8EBF7;
 }
 
 .wall .wall-brick-input {
