@@ -1,0 +1,25 @@
+body {
+	font-size: 13px;
+}
+
+.wall-wrp {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+	margin: 20px;
+}
+
+.wall-wrp .data {
+
+	font-size: 12px;
+	color: #666;
+	margin: 0;
+	padding: 0 0 0 20px;
+}
+
+.annotation .subheader {
+	margin: -10px 0 15px;
+	padding: 0 0 10px;
+	line-height: 16px;
+	font-size: 16px;
+	font-weight: normal;
+	border-bottom: 5px solid #CE2C0C;
+}

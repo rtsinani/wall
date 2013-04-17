@@ -60,11 +60,17 @@
 					'</div>'
 				);
 
-			// store these in the global object so they can be accessed by other objects too
+			// Store these in the global object so they can be accessed by other objects too
 			wall.container = this._input.parents('div.wall');
+			
+			// Add a search icon on the left, for visual cue
 			wall.inputListItem = this._input.parent().before('<li class="wall-brick-search"></li>');
 		},
 
+		// Typical `jQuery UI autocomplete` options,
+		// apart from `source` which is delegated to the search collection;
+		// `select` is triggered when an item in the list selected;
+		// the `position` is shifted down as the container is padded
 		_initAutocomplete: function() {
 			var self = this;
 			var options = {
