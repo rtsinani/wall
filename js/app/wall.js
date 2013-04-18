@@ -1,4 +1,6 @@
-// Style: all private methods & objects start with underscore (_)
+// The final result can be found at [https://github.com/rtsinani/wall/blob/master/test/index.html](https://github.com/rtsinani/wall/blob/master/test/index.html).
+//
+// - Style: all private methods & objects start with underscore (_).
 
 (function () {
 
@@ -63,10 +65,11 @@
 			wall.inputListItem = this._input.parent().before('<li class="wall-brick-search"></li>');
 		},
 
-		// Typical `jQuery UI autocomplete` options,
-		// apart from `source` which is delegated to the search collection;
-		// `select` is triggered when an item in the list selected;
-		// the `position` is shifted down as the container is padded
+		// Typical `jQuery UI autocomplete` options, apart from:
+		// 
+		// - `source` which is delegated to the search collection;
+		// - `select` is triggered when an item in the list selected;
+		// - `position` is shifted down as the container is padded;
 		_initAutocomplete: function() {
 			var self = this;
 			var options = {
